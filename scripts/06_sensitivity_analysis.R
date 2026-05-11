@@ -305,6 +305,7 @@ compute_TWSA_ICERs <- function(
 }
 
 
+output_table <- read.csv("./output/Kerala_general_out.csv")
 twsa_icers <- compute_TWSA_ICERs(
   twsa_summary,
   output_table

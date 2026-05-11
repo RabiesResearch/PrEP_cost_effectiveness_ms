@@ -427,8 +427,8 @@ ce_plane <- ggplot(ce_df2,aes(
   scale_y_continuous(labels = scales::comma) +
   
   labs(
-    x = "Incremental deaths averted vs SQ (median)",
-    y = "Incremental cost vs SQ (million US$)",
+    x = "Incremental deaths averted (median)",
+    y = "Incremental cost (million US$)",
     colour = "Scenario",
     shape  = "Intervention"
   ) +
@@ -461,7 +461,7 @@ combined_plot <- ce_plane / plot_ceac_all + plot_annotation(tag_levels = "A") &
 
 combined_plot
 
-pdf("./output/manuscript_figures/SupplementaryFigure3.pdf", width = 14, height = 5.5, useDingbats = FALSE)
+pdf("./output/manuscript_figures/SupplementaryFigure3.pdf", width = 9, height = 5.5, useDingbats = FALSE)
 print(combined_plot)
 dev.off()
 

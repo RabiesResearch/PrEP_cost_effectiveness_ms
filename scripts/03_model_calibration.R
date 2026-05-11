@@ -263,7 +263,7 @@ Supp_Fig1 <- ggplot(
 Supp_Fig1
 
 #Export Supp_Fig1  ####
-pdf("./output/manuscript_figures/Supp_Fig1.pdf", width = 6, height = 4.5, useDingbats = FALSE)
+pdf("./output/manuscript_figures/SupplementaryFigure1.pdf", width = 6, height = 4.5, useDingbats = FALSE)
 print(Supp_Fig1)
 dev.off()
 
