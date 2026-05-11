@@ -6,7 +6,7 @@
 > **Can pre-exposure prophylaxis close the mortality gap in a setting where post-exposure care is already near-universal?**  
 
 
-![Conceptual Framework](./output/manuscript_figures/Figure1.pdf)
+![Conceptual Framework](./output/manuscript_figures/Framework.png)
 
 
 ---
