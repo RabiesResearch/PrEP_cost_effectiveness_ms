@@ -135,6 +135,7 @@ price_plot <- ggplot(
   ) +
   theme_classic()
 
+price_plot
 
 pdf("./output/manuscript_figures/SupplementaryFigure4.pdf", width = 7.5, height = 4, useDingbats = FALSE)
 print(price_plot)
