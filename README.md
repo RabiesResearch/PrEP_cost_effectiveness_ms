@@ -51,7 +51,7 @@ PrEP_cost_effectiveness_ms/
 
 ## ⚙️ Requirements
 
-**R version:** ≥ 4.5.3
+**R version:** ≥ 4.6.1
 
 ---
 
