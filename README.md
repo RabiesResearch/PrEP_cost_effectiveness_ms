@@ -37,7 +37,7 @@ PrEP_cost_effectiveness_ms/
 │   ├── 04_run_model.R           # All 12 intervention scenarios to generate main results
 │   ├── 05_visualisation.R         # Graphical outputs 
 │   ├── 06_sensitivity_analysis.R  # Sensitivity and uncertainty analyses
-│   └── 07_nhb_analysis.R         # Net health benefit analysis
+│   └── 07_nhb_analysis.R/ 07B_sensitivity_analysis_price         # Net health benefit analysis
 │
 ├── outputs/                     # Model outputs from scenario runs
 │   ├── Kerala_general_out.csv     # Median and 95% PI for all scenarios
