@@ -41,7 +41,8 @@ scenarios1 <- read.csv("./data/scenario_parameters_Kerala_general.csv") %>%
         target_vax_cov_unowned, target_vax_cov_owned,
         pInvestigate, pFound, pTestable, pFS, RIG_cov,
         init_PrEP_cov, PrEP_vials_per_pt, PEP_vials_per_pt,
-        human_vaccine_cost_per_vial, RIG_cost
+        human_vaccine_cost_per_vial_PrEP,
+        human_vaccine_cost_per_vial_PEP, RIG_cost
       ),
       as.numeric
     ),
@@ -94,20 +95,20 @@ run_scenario <- function(scenario_row, common_args, seed = 100L, discount_rate =
 
 plan(multisession, workers = 8)
 
-Kerala_general_parallel <- scenarios1 %>%
-  dplyr::mutate(
-    output = future_map2(
-      .x = split(select(., -scenario), seq_len(nrow(.))),
-      .y = 100L + seq_len(nrow(.)),
-      .f = ~ run_scenario(
-        scenario_row = .x,
-        common_args = common_args1,
-        seed = .y
-      ),
-      .options = furrr_options(seed = TRUE)
-    )
-  ) %>%
-  { set_names(.$output, .$scenario) }
+# Kerala_general_parallel <- scenarios1 %>%
+#   dplyr::mutate(
+#     output = future_map2(
+#       .x = split(select(., -scenario), seq_len(nrow(.))),
+#       .y = 100L + seq_len(nrow(.)),
+#       .f = ~ run_scenario(
+#         scenario_row = .x,
+#         common_args = common_args1,
+#         seed = .y
+#       ),
+#       .options = furrr_options(seed = TRUE)
+#     )
+#   ) %>%
+#   { set_names(.$output, .$scenario) }
 
 
 # Save
@@ -268,7 +269,8 @@ pretty_table <- pretty_table %>%
 
 
 # Export
-write.csv(pretty_table, "./output/Table1.csv",
+## table 2 ####
+write.csv(pretty_table, "./output/Table2.csv",
           row.names = FALSE,
           fileEncoding = "UTF-8")
 write.csv(output_table, "./output/Kerala_general_out.csv")
@@ -285,21 +287,21 @@ scenarios2 <- scenarios1 %>%
 common_args2 <- common_args1
 common_args2$PrEP_effectiveness <- 1
 
-# Run parallel
-Kerala_general_prepEff1 <- scenarios2 %>%
-  dplyr::mutate(
-    output = future_map2(
-      .x = split(select(., -scenario), seq_len(nrow(.))),
-      .y = 3000L + seq_len(nrow(.)),
-      .f = ~ run_scenario(
-        scenario_row = .x,
-        common_args = common_args2,
-        seed = .y
-      ),
-      .options = furrr_options(seed = TRUE)
-    )
-  ) %>%
-  { set_names(.$output, .$scenario) }
+## Run parallel
+# Kerala_general_prepEff1 <- scenarios2 %>%
+#   dplyr::mutate(
+#     output = future_map2(
+#       .x = split(select(., -scenario), seq_len(nrow(.))),
+#       .y = 3000L + seq_len(nrow(.)),
+#       .f = ~ run_scenario(
+#         scenario_row = .x,
+#         common_args = common_args2,
+#         seed = .y
+#       ),
+#       .options = furrr_options(seed = TRUE)
+#     )
+#   ) %>%
+#   { set_names(.$output, .$scenario) }
 
 
 

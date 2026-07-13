@@ -214,7 +214,7 @@ plot_ceac_selected
 plot_ceac_all/plot_ceac_selected  
 
 
-pdf("./output/manuscript_figures/Figure3.pdf", width = 7, height = 3.5, useDingbats = FALSE)
+pdf("./output/manuscript_figures/Figure3.pdf", width = 7.5, height = 4, useDingbats = FALSE)
 print(plot_ceac_selected)
 dev.off()
 
@@ -312,11 +312,11 @@ nhb_wide_selected
 
 # Export Tables
 
-write.csv(nhb_wide_all, "./output/Supp_Table3.csv",
+write.csv(nhb_wide_all, "./output/Supp_Table2.csv",
           row.names = FALSE,
           fileEncoding = "UTF-8")
 
-write.csv(nhb_wide_selected, "./output/Supp_Table4.csv",
+write.csv(nhb_wide_selected, "./output/Supp_Table3.csv",
           row.names = FALSE,
           fileEncoding = "UTF-8")
 

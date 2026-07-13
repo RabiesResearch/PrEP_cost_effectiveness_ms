@@ -159,26 +159,26 @@ args_list <- sensitivity_grid %>%
     unowned_lookup = unowned_lookup
   )
 
-
-output_list <- future_map2(
-  .x = args_list,
-  .y = seeds,
-  .f = ~ {
-    load_rabies_models()                          # EACH WORKER/ CORE NEEDS A COPY OF THE MODELS IN MEMORY
-    out <- do.call(decision_tree_PrEP, purrr::list_modify(.x, seed = .y))
-    out   # burn-in already stripped inside decision_tree_PrEP
-  },
-  .options = furrr::furrr_options(seed = TRUE)
-)
-
-
-
-TWSA_results <- sensitivity_grid %>%
-  dplyr::mutate(
-    seed = seeds,
-    args = args_list,
-    output = output_list
-  )
+## Run model
+# output_list <- future_map2(
+#   .x = args_list,
+#   .y = seeds,
+#   .f = ~ {
+#     load_rabies_models()                          # EACH WORKER/ CORE NEEDS A COPY OF THE MODELS IN MEMORY
+#     out <- do.call(decision_tree_PrEP, purrr::list_modify(.x, seed = .y))
+#     out   # burn-in already stripped inside decision_tree_PrEP
+#   },
+#   .options = furrr::furrr_options(seed = TRUE)
+# )
+# 
+# 
+# 
+# TWSA_results <- sensitivity_grid %>%
+#   dplyr::mutate(
+#     seed = seeds,
+#     args = args_list,
+#     output = output_list
+#   )
 
 
 ## Summarise and plot #########
@@ -420,7 +420,7 @@ p4 <- plot_deaths_surface(
 ( p1 + p2 ) / (p3 + p4)
 
 myplot<- ( p1 + p2 ) / (p3 + p4) +
-  plot_annotation(tag_levels = "A")
+  plot_annotation(tag_levels = "a")
 
 myplot
 

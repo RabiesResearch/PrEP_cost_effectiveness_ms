@@ -12,7 +12,7 @@ owned_dogs_census   <- 836000
 unowned_dogs_census <- 289000
 unowned_multipliers <- c(1, 2, 3, 4, 5, 6, 7)                   # up to 7× unowned
 owned_cov_grid      <- c(0.4,0.5)      # 30–50% # seq(0.30, 0.50, by = 0.10) 
-pSeek_grid          <- c(0.50, 0.60, 0.70, 0.80, 0.90, 0.95)        # care-seeking probabilities = c(0.70, 0.80, 0.90, 0.95) 
+pSeek_grid          <- c(0.50, 0.60, 0.70, 0.80, 0.90, 0.95, 1)        # care-seeking probabilities = c(0.5 -1) 
 
 
 # Common (SQ-like) arguments
@@ -49,7 +49,8 @@ common_args <- list(
   init_PrEP_cov = 0,
   PrEP_effectiveness = 0,
   PrEP_vials_per_pt = 0.66, PEP_vials_per_pt = 0.6,
-  human_vaccine_cost_per_vial = 5,
+  human_vaccine_cost_per_vial_PrEP = 5,
+  human_vaccine_cost_per_vial_PEP = 5,
   RIG_cost = 10,
   birth_rate = 0.012,
   routine_vax_cov = 0.78,
@@ -184,12 +185,12 @@ results <- grid3 %>%
 # Preview results
 results %>% print(n = 5)
 
-
+plot2A_data <- results 
 # 
 # 1) Total seek care/ start PEP (data- 941k); 2) exposures/ all seek care (0.5-3%); 3) deaths (5-26, but may be under reported)
 
 # Save
-# write.csv(results, "output/model_calibration.csv")
+# write.csv(results, "output/model_calibration2.csv")
 
 # visualization #####
 #Supp Figure 1 ####
@@ -208,7 +209,8 @@ median(tail(krl_deaths, 4))
 
 
 target_deaths <- 15 # all years
-target_deaths <- 28 # last 4 years (Optionally = 28/0.7 as 70% of deaths are reported/ neurological *attacks-- find citation)
+target_deaths <- (28/0.7) *10 # last 4 years (Optionally = 28/0.7 as 70% of deaths are reported/ neurological *attacks-- find citation)
+# Multiply deaths by 10 years 
 target_exposure_pct <- 0.5  # note: this is in percent units (e.g., 0.5-3 where 3 = 3%)
 
 plot2A_scored <- plot2A_data %>%
@@ -225,7 +227,8 @@ plot2A_scored <- plot2A_data %>%
     loss = 0.5 * deaths_se_s + 0.5 * expos_se_s
   )
 
-best <- plot2A_scored %>% slice_min(loss, n = 1)
+best <- plot2A_scored %>% slice_min(loss, n = 1) %>% 
+  dplyr::select(unowned_mult, pSeek_exp, deaths_Median, exposure_pct_Median, loss)
 
 Supp_Fig1 <- ggplot(
   plot2A_scored,

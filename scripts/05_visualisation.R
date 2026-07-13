@@ -451,7 +451,7 @@ ce_plane / plot_ceac_all
 
 
 
-combined_plot <- ce_plane / plot_ceac_all + plot_annotation(tag_levels = "A") &
+combined_plot <- ce_plane / plot_ceac_all + plot_annotation(tag_levels = "a") &
   theme(
     legend.position = "right",
     #legend.title = element_text(size = 9),
@@ -461,7 +461,7 @@ combined_plot <- ce_plane / plot_ceac_all + plot_annotation(tag_levels = "A") &
 
 combined_plot
 
-pdf("./output/manuscript_figures/SupplementaryFigure3.pdf", width = 9, height = 5.5, useDingbats = FALSE)
+pdf("./output/manuscript_figures/SupplementaryFigure3.pdf", width = 9, height = 7, useDingbats = FALSE)
 print(combined_plot)
 dev.off()
 
@@ -561,10 +561,10 @@ myplot <- p_exp + p_deaths + p_costs +
 
 myplot
 
-# Export to 2 (pdf) pages
+# Export to 1 (pdf) pages
 
 scenarios <- levels(plot_df$scenario)
-chunks <- split(scenarios, ceiling(seq_along(scenarios) / 6))
+chunks <- split(scenarios, ceiling(seq_along(scenarios) / 12))
 
 make_page <- function(df, scen_subset) {
   df_sub <- df %>% filter(scenario %in% scen_subset)
@@ -581,7 +581,7 @@ make_page <- function(df, scen_subset) {
   
   p_exp + p_deaths + p_costs +
     plot_layout(ncol = 3) +
-    plot_annotation(tag_levels = "A")
+    plot_annotation(tag_levels = "a")
 }
 
 pdf("./output/manuscript_figures/SupplementaryFigure2.pdf", width = 10, height = 12) 

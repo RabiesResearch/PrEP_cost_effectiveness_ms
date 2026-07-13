@@ -40,7 +40,8 @@ decision_tree_PrEP <- function(N = 10, pop = 35e6, HDR = c(16,17), unowned_prop 
                                pFS = 0.05, RIG_cov = 0.38,
                                init_PrEP_cov = 0.15, PrEP_effectiveness = 0,
                                PrEP_vials_per_pt = 0.44, PEP_vials_per_pt = 0.66,
-                               human_vaccine_cost_per_vial = 5, RIG_cost = 12,
+                               human_vaccine_cost_per_vial_PEP = 5, RIG_cost = 12,
+                               human_vaccine_cost_per_vial_PrEP=5, 
                                birth_rate = 0.012, routine_vax_cov = 0.78,
                                seed = 123, ibcm = "no", dog_burnin = 1) {
   
@@ -325,9 +326,9 @@ decision_tree_PrEP <- function(N = 10, pop = 35e6, HDR = c(16,17), unowned_prop 
   
   # discount costs
   disc <- (1 + discount)^(-(0:(horizon - 1)))
-  ts_cost_PrEP         <- sweep(PrEP_vials    * human_vaccine_cost_per_vial, 2, disc, `*`)
+  ts_cost_PrEP         <- sweep(PrEP_vials    * human_vaccine_cost_per_vial_PrEP, 2, disc, `*`)
   ts_RIG_cost_per_year <- sweep(ts_RIG        * RIG_cost,                    2, disc, `*`)
-  ts_cost_PEP_per_year <- sweep(ts_PEP_vials  * human_vaccine_cost_per_vial, 2, disc, `*`)
+  ts_cost_PEP_per_year <- sweep(ts_PEP_vials  * human_vaccine_cost_per_vial_PEP, 2, disc, `*`)
   ts_MDV_campaign_cost <- sweep(MDV_campaign_cost,                           2, disc, `*`)
   ts_cost_per_year     <- ts_MDV_campaign_cost + ts_cost_PrEP + ts_cost_PEP_per_year + ts_RIG_cost_per_year
   
@@ -366,7 +367,7 @@ tmp <- decision_tree_PrEP(
   pInvestigate = 0.5, pFound = 0.4, pTestable = 0.2, pFS=0.05, RIG_cov =0.4,
   init_PrEP_cov=0.14, # If zero, means no PrEP. If >0, this is the coverage achieved through school campaigns (relative to entire population)
   PrEP_effectiveness = 1, PrEP_vials_per_pt = 0.6, PEP_vials_per_pt = 0.6,
-  human_vaccine_cost_per_vial=5, RIG_cost=70, birth_rate = 0.01, routine_vax_cov = 0.7,
+  human_vaccine_cost_per_vial_PEP=5, human_vaccine_cost_per_vial_PrEP=5, RIG_cost=70, birth_rate = 0.01, routine_vax_cov = 0.7,
   seed = 123, ibcm = "no", dog_burnin = 3
  )
 
